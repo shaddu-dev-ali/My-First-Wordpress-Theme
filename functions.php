@@ -42,3 +42,37 @@ add_action(
     'after_setup_theme',
     'mytheme_setup'
 );
+
+function mytheme_register_project_post_type() {
+
+    register_post_type(
+        'project',
+        [
+            'labels' => [
+                'name'          => __( 'Projects', 'my-first-theme' ),
+                'singular_name' => __( 'Project', 'my-first-theme' ),
+            ],
+
+            'public'      => true,
+            'has_archive' => true,
+
+            'menu_icon' => 'dashicons-portfolio',
+
+            'supports' => [
+                'title',
+                'editor',
+                'thumbnail',
+            ],
+
+            'rewrite' => [
+                'slug' => 'projects',
+            ],
+        ]
+    );
+
+}
+
+add_action(
+    'init',
+    'mytheme_register_project_post_type'
+);
