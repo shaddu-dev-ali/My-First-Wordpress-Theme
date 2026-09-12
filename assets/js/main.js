@@ -1,0 +1,1 @@
+console.log('My WordPress theme JavaScript is working!');
