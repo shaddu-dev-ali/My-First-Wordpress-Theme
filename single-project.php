@@ -11,6 +11,46 @@
                 <h1>
                     <?php the_title(); ?>
                 </h1>
+                <div >
+<p> <?php the_date(); ?></p>
+<p> <?php the_author(); ?></p>
+    </div>
+
+    <?php
+
+$location = get_post_meta(
+    get_the_ID(),
+    '_project_location',
+    true
+);
+
+$year = get_post_meta(
+    get_the_ID(),
+    '_project_year',
+    true
+);
+
+?>
+
+
+<?php if ( $location ) : ?>
+
+    <p>
+        <strong>Location:</strong>
+        <?php echo esc_html( $location ); ?>
+    </p>
+
+<?php endif; ?>
+
+<?php if ( $year ) : ?>
+
+    <p>
+        <strong>Year:</strong>
+        <?php echo esc_html( $year ); ?>
+    </p>
+
+<?php endif; ?>
+
 
                 <?php if ( has_post_thumbnail() ) : ?>
 
