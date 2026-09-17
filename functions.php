@@ -204,3 +204,79 @@ add_action(
     'save_post_project',
     'mytheme_save_project_meta'
 );
+
+function mytheme_register_project_taxonomy() {
+
+    register_taxonomy(
+        'project_type',
+        'project',
+        [
+            'labels' => [
+                'name'          => __( 'Project Types', 'my-first-theme' ),
+                'singular_name' => __( 'Project Type', 'my-first-theme' ),
+            ],
+
+            'public'       => true,
+            'hierarchical' => true,
+
+            'rewrite' => [
+                'slug' => 'project-type',
+            ],
+        ]
+    );
+
+}
+
+add_action(
+    'init',
+    'mytheme_register_project_taxonomy'
+);
+
+function mytheme_register_project_location_taxonomy() {
+
+    register_taxonomy(
+        'project_location',
+        'project',
+        [
+            'labels' => [
+                'name'          => __( 'Project Locations', 'my-first-theme' ),
+                'singular_name' => __( 'Project Location', 'my-first-theme' ),
+            ],
+
+            'public'       => true,
+            'hierarchical' => true,
+
+            'rewrite' => [
+                'slug' => 'project-location',
+            ],
+        ]
+    );
+
+}
+
+add_action(
+    'init',
+    'mytheme_register_project_location_taxonomy'
+);
+
+function mytheme_project_archive_query( $query ) {
+
+    if (
+        ! is_admin() &&
+        $query->is_main_query() &&
+        is_post_type_archive( 'project' )
+    ) {
+
+        $query->set(
+            'posts_per_page',
+            3
+        );
+
+    }
+
+}
+
+add_action(
+    'pre_get_posts',
+    'mytheme_project_archive_query'
+);

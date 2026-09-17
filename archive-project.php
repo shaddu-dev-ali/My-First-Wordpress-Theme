@@ -14,6 +14,35 @@
 
     </header>
 
+    <?php
+$project_types = get_terms(
+    [
+        'taxonomy'   => 'project_type',
+        'hide_empty' => true,
+    ]
+);
+?>
+
+<?php if ( ! empty( $project_types ) && ! is_wp_error( $project_types ) ) : ?>
+
+    <nav class="project-filters">
+
+        <a href="<?php echo esc_url( get_post_type_archive_link( 'project' ) ); ?>">
+            All Projects
+        </a>
+
+        <?php foreach ( $project_types as $project_type ) : ?>
+
+            <a href="<?php echo esc_url( get_term_link( $project_type ) ); ?>">
+                <?php echo esc_html( $project_type->name ); ?>
+            </a>
+
+        <?php endforeach; ?>
+
+    </nav>
+
+<?php endif; ?>
+
     <?php if ( have_posts() ) : ?>
 
         <?php while ( have_posts() ) : the_post(); ?>
@@ -39,6 +68,10 @@
             </article>
 
         <?php endwhile; ?>
+
+        <?php
+the_posts_pagination();
+?>
 
     <?php else : ?>
 

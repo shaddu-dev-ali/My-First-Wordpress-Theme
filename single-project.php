@@ -64,6 +64,29 @@ $year = get_post_meta(
 
                 </div>
 
+                <?php
+
+$project_types = get_the_terms(
+    get_the_ID(),
+    'project_type'
+);
+
+ if ( ! empty( $project_types ) && ! is_wp_error( $project_types ) ) : ?>
+
+    <ul>
+
+        <?php foreach ( $project_types as $project_type ) : ?>
+
+            <li>
+                <?php echo esc_html( $project_type->name ); ?>
+            </li>
+
+        <?php endforeach; ?>
+
+    </ul>
+
+<?php endif; ?>
+
             </article>
 
         <?php endwhile; ?>

@@ -30,3 +30,20 @@ Version: 1.0
 .featured-posts h3 a:hover {
     text-decoration: underline;
 }
+
+.project-filters {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.project-filters a {
+    color: #111;
+    text-decoration: none;
+}
+
+.project-filters a:hover,
+.project-filters a.active {
+    text-decoration: underline;
+}
